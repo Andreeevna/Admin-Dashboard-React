@@ -11,6 +11,8 @@ import generalRoutes from './routes/general.js'
 import managementRoutes from './routes/management.js'
 import salesRoutes from './routes/sales.js'
 
+import model from './models/user.js'
+
 // CONFIGURATION
 
 dotenv.config()
@@ -42,7 +44,14 @@ const PORT = process.env.PORT || 9000
 
 mongoose
 	.connect(process.env.MONGO_URL)
-	.then(() => {
+	.then(async () => {
+		await model
+			.find({
+				name: {
+					$in: ['Svetlana'],
+				},
+			})
+			.then(res => console.log(res))
 		app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
 	})
 	.catch(error => console.log(`${error} did not conncted`))
