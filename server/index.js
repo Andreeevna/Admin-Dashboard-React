@@ -1,10 +1,14 @@
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 
-import cors from 'cors'
+import clientRoutes from './routes/clients'
+import generalRoutes from './routes/general'
+import managementRoutes from './routes/management'
+import salesRoutes from './routes/sales'
 
 // CONFIGURATION
 
@@ -24,3 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 // ROUTES
+app.use('/client', clientRoutes)
+app.use('/general', generalRoutes)
+app.use('/management', managementRoutes)
+app.use('/sales', salesRoutes)
