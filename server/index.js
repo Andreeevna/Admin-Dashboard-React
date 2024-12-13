@@ -3,12 +3,13 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
+import mongoose from 'mongoose'
 import morgan from 'morgan'
 
-import clientRoutes from './routes/clients'
-import generalRoutes from './routes/general'
-import managementRoutes from './routes/management'
-import salesRoutes from './routes/sales'
+import clientRoutes from './routes/client.js'
+import generalRoutes from './routes/general.js'
+import managementRoutes from './routes/management.js'
+import salesRoutes from './routes/sales.js'
 
 // CONFIGURATION
 
@@ -32,3 +33,16 @@ app.use('/client', clientRoutes)
 app.use('/general', generalRoutes)
 app.use('/management', managementRoutes)
 app.use('/sales', salesRoutes)
+
+console.log('restart')
+
+// MONGOOSE SETUP
+
+const PORT = process.env.PORT || 9000
+
+mongoose
+	.connect(process.env.MONGO_URL)
+	.then(() => {
+		app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
+	})
+	.catch(error => console.log(`${error} did not conncted`))
