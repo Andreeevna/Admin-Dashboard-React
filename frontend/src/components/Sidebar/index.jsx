@@ -2,6 +2,7 @@ import {
 	AdminPanelSettingsOutlined,
 	CalendarMonthOutlined,
 	ChevronLeft,
+	ChevronRightOutlined,
 	Groups2Outlined,
 	HomeOutlined,
 	PieChartOutlined,
@@ -12,7 +13,18 @@ import {
 	TodayOutlined,
 	TrendingUpOutlined,
 } from '@mui/icons-material'
-import { Box, Drawer, IconButton, Typography, useTheme } from '@mui/material'
+import {
+	Box,
+	Drawer,
+	IconButton,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemIcon,
+	ListItemText,
+	Typography,
+	useTheme,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import FlexBetween from '../FlexBetween'
@@ -127,7 +139,60 @@ const Sidebar = ({
 								)}
 							</FlexBetween>
 						</Box>
-						<List></List>
+						<List>
+							{navItems.map(({ text, icon }) => {
+								if (!icon) {
+									return (
+										<Typography
+											key={text}
+											sx={{
+												m: '2.25rem 0 1rem 3rem',
+											}}
+										>
+											{text}
+										</Typography>
+									)
+								}
+								const lowerCaseText = text.toLowerCase()
+
+								return (
+									<ListItem key={text} disablePadding>
+										<ListItemButton
+											onClick={() => {
+												navigate(`/${lowerCaseText}`)
+												setActive(lowerCaseText)
+											}}
+											sx={{
+												backgroundColor:
+													active === lowerCaseText
+														? theme.palette.secondary[300]
+														: 'transparent',
+												color:
+													active === lowerCaseText
+														? theme.palette.primary[600]
+														: theme.palette.secondary[100],
+											}}
+										>
+											<ListItemIcon
+												sx={{
+													ml: '2rem',
+													color:
+														active === lowerCaseText
+															? theme.palette.primary[600]
+															: theme.palette.secondary[200],
+												}}
+											>
+												{icon}
+											</ListItemIcon>
+											<ListItemText primary={text} />
+											{active === lowerCaseText && (
+												<ChevronRightOutlined sx={{ ml: 'auto' }} />
+											)}
+										</ListItemButton>
+									</ListItem>
+								)
+							})}
+						</List>
 					</Box>
 				</Drawer>
 			)}
