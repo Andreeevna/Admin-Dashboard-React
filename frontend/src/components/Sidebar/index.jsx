@@ -95,7 +95,6 @@ const Sidebar = ({
 	setIsSidebarOpen,
 }) => {
 	const { pathName } = useLocation()
-	console.log(pathName)
 	const navigate = useNavigate()
 	const theme = useTheme()
 
@@ -196,7 +195,6 @@ const Sidebar = ({
 					</Box>
 				</Drawer>
 			)}
-			fvfvfvfv
 		</Box>
 	)
 }

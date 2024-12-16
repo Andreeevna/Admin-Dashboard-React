@@ -28,7 +28,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 			>
 				{/* LEFT */}
 				<FlexBetween>
-					<IconButton onClick={() => console.log('open sidebar')}>
+					<IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
 						<MenuIcon />
 					</IconButton>
 					<FlexBetween

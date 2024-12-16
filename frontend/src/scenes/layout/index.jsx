@@ -24,7 +24,6 @@ const Layout = () => {
 				/>
 				<Outlet />
 			</Box>
-			Layout
 		</Box>
 	)
 }
