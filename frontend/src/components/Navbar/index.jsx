@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { setMode } from '../../state/index.js'
 import FlexBetween from '../FlexBetween.jsx'
 
-const Navbar = () => {
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 	const dispatch = useDispatch()
 	const theme = useTheme()
 	return (
