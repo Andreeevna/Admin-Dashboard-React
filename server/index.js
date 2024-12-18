@@ -49,5 +49,7 @@ mongoose
 
 		// only add data one time
 		// User.insertMany(dataUser)
+		// Product.insertMany(dataProduct)
+		// ProductStat.insertMany(dataProductStat)
 	})
 	.catch(error => console.log(`${error} did not conncted`))
