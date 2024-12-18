@@ -22,6 +22,7 @@ const Product = ({
 	category,
 	rating,
 	supply,
+	stat,
 }) => {
 	const theme = useTheme()
 
@@ -96,7 +97,7 @@ const Products = () => {
 	const isNoMobile = useMediaQuery('(min-width: 1000px)')
 
 	const { data, isLoading } = useGetProductsQuery()
-	console.log(data)
+
 	return (
 		<Box m='1.5rem 2.5rem'>
 			<Header title={'PRODUCTS'} subTitle={'See your list of products'} />
@@ -114,7 +115,30 @@ const Products = () => {
 						},
 					}}
 				>
-					{/* {data.map(() => ({}))} */}
+					{data.map(
+						({
+							_id,
+							name,
+							price,
+							description,
+							category,
+							rating,
+							supply,
+							stat,
+						}) => (
+							<Product
+								key={_id}
+								_id={_id}
+								name={name}
+								price={price}
+								description={description}
+								category={category}
+								rating={rating}
+								supply={supply}
+								stat={stat}
+							/>
+						)
+					)}
 				</Box>
 			) : (
 				<>Loading...</>
