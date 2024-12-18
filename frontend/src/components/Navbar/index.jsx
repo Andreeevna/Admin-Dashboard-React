@@ -12,6 +12,8 @@ import {
 	Button,
 	IconButton,
 	InputBase,
+	Menu,
+	MenuItem,
 	Toolbar,
 	Typography,
 	useTheme,
@@ -128,6 +130,14 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 								sx={{ color: theme.palette.secondary[300], fontSize: '25px' }}
 							/>
 						</Button>
+						<Menu
+							anchorEl={anchorEl}
+							open={isOpen}
+							onClose={handleClose}
+							anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+						>
+							<MenuItem onClick={handleClose}>Log Out</MenuItem>
+						</Menu>
 					</FlexBetween>
 				</FlexBetween>
 			</Toolbar>
