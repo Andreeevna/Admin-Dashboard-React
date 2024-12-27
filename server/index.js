@@ -36,8 +36,6 @@ app.use('/general', generalRoutes)
 app.use('/management', managementRoutes)
 app.use('/sales', salesRoutes)
 
-console.log('restart')
-
 // MONGOOSE SETUP
 
 const PORT = process.env.PORT || 9000
