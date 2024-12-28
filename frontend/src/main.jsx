@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import globalReducer from '../src/state'
@@ -19,9 +18,7 @@ const store = configureStore({
 setupListeners(store.dispatch)
 
 createRoot(document.getElementById('root')).render(
-	<StrictMode>
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</StrictMode>
+	<Provider store={store}>
+		<App />
+	</Provider>
 )

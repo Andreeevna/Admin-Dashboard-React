@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material'
+import { Box, Stack, TextField, useTheme } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import { useState } from 'react'
 import DataGridCustomToolbar from '../../components/DataGridCustomToolbar/DataGridCustomToolbar'
@@ -51,10 +51,54 @@ const Transactions = () => {
 			renderCell: params => `$${Number(params.value).toFixed(2)}`,
 		},
 	]
+	console.log(searchInput)
+
+	// const filteredRows1 = useMemo(() => {
+	// 	return userRows?.filter(row => {
+	// 		return Object.entries(row).every(([key, value]) => {
+	// 			if (!filterValues[key]) {
+	// 				return true
+	// 			}
+	// 			return value?.toString()?.toLowerCase()?.includes(filterValues[key])
+	// 		})
+	// 	})
+	// }, [filterValues, userRows])
+
+	const filteredRows = () => {
+		if (!data) return
+		const normalizedSearchInput = searchInput?.toString().toLowerCase()
+
+		return data?.transactions.filter(row => {
+			return Object.entries(row).some(([key, value]) => {
+				const isExist = value
+					?.toString()
+					?.toLowerCase()
+					.includes(normalizedSearchInput)
+				// if (!isExist) {
+				// 	return true
+				// }
+				return isExist
+			})
+		})
+	}
+
+	console.log(filteredRows())
 
 	return (
 		<Box m='1.5rem 2.5rem'>
 			<Header title='TRANSACTIONS' subtitle='Entire list of transactions' />
+			<Box display='flex' justifyContent={'right'}>
+				<Stack spacing={2} sx={{ width: 300 }}>
+					{/* <Autocomplete
+					renderInput={params => <TextField {...params} label='search' />}
+				/> */}
+					<TextField
+						label='search'
+						onInput={event => setSearchInput(event.target.value)}
+					/>
+				</Stack>
+			</Box>
+
 			<Box
 				mt='40px'
 				height='80vh'
@@ -86,7 +130,7 @@ const Transactions = () => {
 				<DataGrid
 					loading={isLoading || !data}
 					getRowId={row => row._id}
-					rows={(data && data.transactions) || []}
+					rows={filteredRows()}
 					columns={columns}
 					rowCount={(data && data.total) || 0}
 					rowsPerPageOptions={[20, 50, 100]}
