@@ -51,7 +51,7 @@ const Transactions = () => {
 			renderCell: params => `$${Number(params.value).toFixed(2)}`,
 		},
 	]
-	console.log(searchInput)
+	// console.log(searchInput)
 
 	// const filteredRows1 = useMemo(() => {
 	// 	return userRows?.filter(row => {
@@ -70,14 +70,13 @@ const Transactions = () => {
 
 		return data?.transactions.filter(row => {
 			return Object.entries(row).some(([key, value]) => {
-				const isExist = value
-					?.toString()
-					?.toLowerCase()
-					.includes(normalizedSearchInput)
-				// if (!isExist) {
-				// 	return true
-				// }
-				return isExist
+				if (Array.isArray(value)) {
+					return value.some(el =>
+						el?.toString()?.toLowerCase().includes(normalizedSearchInput)
+					)
+				}
+
+				return value?.toString()?.toLowerCase().includes(normalizedSearchInput)
 			})
 		})
 	}
